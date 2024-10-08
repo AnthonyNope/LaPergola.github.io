@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let cart = [];
 
     // URL de la API de Google Sheets
-    const apiURL = 'https://script.google.com/macros/s/AKfycbwFpvkvT3Mah5n6a8r5-i_kNvF2YgIAhNuUJyhZGkNHAYlh4tE1pE7avvAveIlMH25L6g/exec';
+    // const apiURL = 'https://script.google.com/macros/s/AKfycbwFpvkvT3Mah5n6a8r5-i_kNvF2YgIAhNuUJyhZGkNHAYlh4tE1pE7avvAveIlMH25L6g/exec';
+       const apiURL = 'https://script.google.com/macros/s/AKfycbzO5EVBfGcSgLcLc7n3wkC-4lYI8iHm9SVLX3Sh-WXc3Ub9CkpSLYvWgZxSFxffoMDrUA/exec';
     //const apiURL = 'https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbwFpvkvT3Mah5n6a8r5-i_kNvF2YgIAhNuUJyhZGkNHAYlh4tE1pE7avvAveIlMH25L6g/exec';
-
     // Función para cargar productos desde Google Sheets
     function loadMenuItems(category = 'platos-principales') {  
         // Realizar la solicitud GET a la API
-        fetch(apiURL) //{ method: 'GET', mode: 'cors' }
+        fetch(apiURL, {method: 'GET'}) //{ method: 'GET', mode: 'cors' }
             .then(response => response.json()) // Parsear la respuesta a formato JSON
             .then(data => {
                 const menuItems = data.data; // Obtener los productos del JSON
@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Si el producto ya está en el carrito, aumentar su cantidad
                 cartItem.quantity += 1;
                 found = true;
+                alert("Producto agregado con éxito.");
             }
         });
 
@@ -66,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!found) {
             item.quantity = 1;
             cart.push(item);
+            alert("Producto agregado con éxito.");
         }
 
         updateCart(); // Actualizar la visualización del carrito
